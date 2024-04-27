@@ -1,0 +1,19 @@
+<div class="nav_panel">
+    <button class="toggle_btn">
+        <i class="fas fa-plus"></i>
+    </button>
+    <h3 class="menu_title">ВП СПЛК</h3>
+    <nav>
+        <ul>
+        {% for item in menu %}
+            <li>
+                <a href="{% url item.url_name %}" class="nav_item" title="{{ item.title }}">
+                    <div class="nav_icon"><i class="fas {{ item.icon}}"></i></div>
+                    <div class="nav_title">{{ item.title }}</div>
+                </a>
+            </li>
+            {% if not forloop.last %} <hr> {% endif %}
+        {% endfor %}
+        </ul>
+    </nav>
+</div>

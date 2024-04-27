@@ -1,0 +1,135 @@
+:root {
+    --white: #fff;
+    --green: #116466;
+    --black: #2c3531;
+    --brown: #d9b08c;
+    --light_brown: #ffcb9a;
+    --medium_text: 20px;
+    --large_text: 30px;
+    --transition: all 0.2s ease-in-out;
+}
+
+html body{
+    font-family: "Jura", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    font-style: normal;
+}
+
+body.main{
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    margin: 0;
+}
+
+.nav_panel{
+    height: 100vh;
+    width: 17%;
+    background-color: var(--green);
+    color: var(--white);
+    padding: 20px 30px;
+    position: relative;
+    transition: var(--transition);
+}
+
+.nav_panel .toggle_btn{
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    background-color: transparent;
+    border: none;
+    padding: 0px;
+    color: var(--white);
+}
+
+.nav_panel .toggle_btn .fas{
+    margin-right: -10px;
+    transform: rotate(-45deg);
+    font-size: 25px;
+    transition: var(--transition);
+}
+
+.nav_panel .menu_title{
+    font-size: var(--large_text);
+    text-align: center;
+    margin: 0;
+    padding: 20px 0;
+}
+
+.nav_panel ul{
+    list-style: none;
+    padding: 0;
+    margin-top: 30px;
+}
+
+.nav_panel .nav_item{
+    font-size: var(--medium_text);
+    color: var(--white);
+    text-decoration: none;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 10px 20px;
+    transition: var(--transition);
+}
+
+.nav_panel .nav_item .nav_icon{
+    margin-right: 16px;
+    width: 30px;
+    display: flex;
+    justify-content: center;
+}
+
+.nav_panel .nav_item .nav_icon .fas{
+    font-size: 24px;
+}
+
+.nav_panel.toggle{
+    width: 3%;
+    padding: 20px 5px;
+}
+
+.nav_panel.toggle .menu_title {
+    display: none;
+    visibility: hidden;
+}
+
+.nav_panel.toggle .nav_item {
+    padding: 5px;
+    justify-content: center;
+}
+
+.nav_panel.toggle .nav_item .nav_title{
+    display: none;
+    visibility: hidden;
+}
+
+.nav_panel.toggle .nav_item .nav_icon{
+    margin-right: 0;
+}
+
+.nav_panel.toggle .toggle_btn{
+    justify-content: center;
+}
+
+.nav_panel.toggle .toggle_btn .fas{
+    transform: none;
+    margin-right: 0;
+}
+
+@media(hover){
+    .nav_panel .toggle_btn:hover .fas{
+        color: var(--brown);
+        transform: rotate(45deg);
+    }
+
+    .nav_panel .nav_item:hover {
+        color: var(--brown);
+    }
+
+    .nav_panel.toggle .toggle_btn:hover .fas{
+        transform: rotate(90deg);
+    }
+}

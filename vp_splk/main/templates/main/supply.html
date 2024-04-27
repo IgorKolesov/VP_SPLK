@@ -1,0 +1,15 @@
+{% extends 'main/main_base.html' %}
+
+{% block content %}
+<div>
+    <h1>{{ supply.id }}</h1>
+    <h2>{{ supply.name }}</h2>
+    <h3> {{ supply.start_point_address }} </h3>
+    <h3> {{ supply.end_point_address }} </h3>
+    <h4> {{ supply.time_create }}</h4>
+    <h4> {{ supply.time_update }}</h4>
+
+    <a href="{{ supply.get_absolute_url }}"> подробнее</a>
+</div>
+
+{% endblock %}

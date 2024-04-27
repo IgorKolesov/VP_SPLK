@@ -1,0 +1,26 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ title|default:'Страница' }}</title>
+    <link type="text/css" href="{% static 'main/css/style.css' %}" rel='stylesheet' />
+
+
+    <link type="text/css" href="{% static '/css/reset.css' %}" rel='stylesheet' />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jura:wght@300..700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body class="main">
+
+{% include 'main/includes/nav_panel.html' only with menu=menu %}
+
+{% block content %} {% endblock %}
+
+</body>
+
+<script src="{% static 'main/js/scripts.js' %}"></script>
+</html>

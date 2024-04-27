@@ -1,0 +1,22 @@
+{% extends 'main/main_base.html' %}
+
+{% block content %}
+<h1>{{ title }}</h1>
+
+<div>
+    <ul>
+    {% for supply in supplies %}
+        <li>
+            <p>{{ supply.id }}</p>
+            <h2>{{ supply.name }}</h2>
+            <h4> {{ supply.type }} </h4>
+            <a href="{{ supply.get_absolute_url }}">Подробнее</a>
+        </li>
+        {% if not forloop.last %}
+        <hr>
+        {% endif %}
+    {% endfor %}
+    </ul>
+</div>
+
+{% endblock %}
