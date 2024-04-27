@@ -64,3 +64,4 @@ class Cargo(models.Model):
         indexes = [
             models.Index(fields=['supply', '-time_create'])
         ]
+
