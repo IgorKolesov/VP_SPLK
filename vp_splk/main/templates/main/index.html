@@ -1,5 +1,29 @@
 {% extends 'main/main_base.html' %}
+{% load main_tags %}
 
 {% block content %}
 <h1>{{ title }}</h1>
+
+
+<!-- Slider main container -->
+<div class="swiper supplies_swiper">
+  <!-- Additional required wrapper -->
+  <div class="swiper-wrapper">
+    <!-- Slides -->
+
+      {% show_recent_supplies %}
+
+      <a href="{% url 'supplies' %}" class="swiper-slide show_all card">
+            <h3><b>Смотреть все</b></h3>
+      </a>
+
+  </div>
+
+    <div class="navigation">
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-pagination"></div>
+        <div class="swiper-button-next"></div>
+    </div>
+</div>
+
 {% endblock %}

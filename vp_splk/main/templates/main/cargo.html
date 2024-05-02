@@ -1,0 +1,30 @@
+    {% extends 'main/main_base.html' %}
+
+{% block content %}
+<div>
+    <h1>{{ supply.id }}</h1>
+    <h2>{{ supply.name }}</h2>
+    <h3> {{ supply.start_point_address }} </h3>
+    <h3> {{ supply.end_point_address }} </h3>
+    <h4> {{ supply.time_create }}</h4>
+    <h4> {{ supply.time_update }}</h4>
+
+<!--    <a href="{{ supply.get_absolute_url }}"> подробнее</a>-->
+</div>
+
+<div>
+    <p>{{ cargo.name }}</p>
+    <p>{{ cargo.supply }}</p>
+    <p>{{ cargo.description }}</p>
+    <p>{{ cargo.type }}</p>
+    <p>{{ cargo.weight }}</p>
+    <p>{{ cargo.length }}</p>
+    <p>{{ cargo.width }}</p>
+    <p>{{ cargo.height }}</p>
+    <p>{{ cargo.amount }}</p>
+    <p>{{ cargo.units }}</p>
+    <p>{{ cargo.time_create|date:'d-m-y' }}</p>
+    <p>{{ cargo.time_update|date:'d-m-y' }}</p>
+</div>
+
+{% endblock %}

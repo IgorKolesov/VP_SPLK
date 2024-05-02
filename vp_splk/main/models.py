@@ -1,6 +1,7 @@
 from django.db import models
 from django.urls import reverse
 
+
 class ActiveSuppliesManager(models.Manager):
     def get_queryset(self):
         return super().get_queryset().filter(is_active=Supply.Status.ACTIVE)
@@ -13,17 +14,17 @@ class NonActiveSuppliesManager(models.Manager):
 
 class Supply(models.Model):
     class Status(models.IntegerChoices):
-        ACTIVE = 1, 'Действующая доставка'
-        NON_ACTIVE = 0, 'Выполненная доставка'
+        ACTIVE = 1, 'В работе'
+        NON_ACTIVE = 0, 'Завершена'
 
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=100, verbose_name='Название')
     # employee_id =
     # client_id =
-    start_point_address = models.CharField(max_length=250)
-    end_point_address = models.CharField(max_length=250)
-    time_create = models.DateTimeField(auto_now_add=True)
-    time_update = models.DateTimeField(auto_now=True)
-    is_active = models.BooleanField(choices=Status.choices, default=Status.ACTIVE)
+    start_point_address = models.CharField(max_length=250, verbose_name='Откуда')
+    end_point_address = models.CharField(max_length=250, verbose_name='Куда')
+    time_create = models.DateTimeField(auto_now_add=True, verbose_name='Время создания')
+    time_update = models.DateTimeField(auto_now=True, verbose_name='Время последнего изменения')
+    is_active = models.BooleanField(choices=Status.choices, default=Status.ACTIVE, verbose_name='Статус доставки')
 
     objects = models.Manager()
     active = ActiveSuppliesManager()
@@ -33,6 +34,9 @@ class Supply(models.Model):
         return self.name
 
     class Meta:
+        verbose_name = 'Доставки'
+        verbose_name_plural = 'Доставки'
+
         ordering = ['-time_create']
         indexes = [
             models.Index(fields=['-time_create'])
@@ -65,3 +69,5 @@ class Cargo(models.Model):
             models.Index(fields=['supply', '-time_create'])
         ]
 
+    def get_absolute_url(self):
+        return reverse('cargo', kwargs={'supply_id': self.supply_id, 'cargo_id': self.id})

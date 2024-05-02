@@ -1,4 +1,5 @@
 {% load static %}
+{% load main_tags %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -13,14 +14,18 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Jura:wght@300..700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
 </head>
 <body class="main">
 
-{% include 'main/includes/nav_panel.html' only with menu=menu %}
+{% show_menu %}
 
+<div class="content">
 {% block content %} {% endblock %}
+</div>
 
 </body>
 
 <script src="{% static 'main/js/scripts.js' %}"></script>
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 </html>

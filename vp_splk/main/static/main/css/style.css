@@ -4,9 +4,19 @@
     --black: #2c3531;
     --brown: #d9b08c;
     --light_brown: #ffcb9a;
+    --red: #E32636;
+    --yellow: #daa520;
     --medium_text: 20px;
     --large_text: 30px;
     --transition: all 0.2s ease-in-out;
+}
+
+* {
+    box-sizing:border-box;
+}
+
+b {
+    font-weight: bold !important;
 }
 
 html body{
@@ -30,8 +40,9 @@ body.main{
     background-color: var(--green);
     color: var(--white);
     padding: 20px 30px;
-    position: relative;
+    position: fixed;
     transition: var(--transition);
+    flex-shrink: 0;
 }
 
 .nav_panel .toggle_btn{
@@ -119,6 +130,160 @@ body.main{
     margin-right: 0;
 }
 
+.nav_panel .nav_item.active_page_link {
+    pointer-events: none;
+    cursor: default;
+    color: var(--brown);
+}
+
+.swiper.supplies_swiper {
+    width: 100%;
+    height: auto;
+    padding: 30px 30px 50px;
+}
+
+.main .content {
+    display: flex;
+    width: 83%;
+    margin-left: auto;
+    flex-direction: column;
+}
+
+.card .status_item{
+    border-radius: 10px;
+    color: var(--white);
+    width: max-content;
+    padding: 10px;
+    transition: var(--transition);
+}
+
+.card .supply_title {
+    font-size: var(--large_text);
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.supplies_swiper .swiper-slide{
+    padding: 20px;
+    color: var(--black);
+    text-decoration: none;
+    -webkit-box-shadow: 5px 5px 15px 0px rgba(0,0,0,0.1);
+    -moz-box-shadow: 5px 5px 15px 0px rgba(0,0,0,0.1);
+    box-shadow: 5px 5px 15px 0px rgba(0,0,0,0.1);
+    transition: var(--transition);
+
+}
+
+.supplies_swiper .swiper-slide.show_all {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.supplies_swiper .swiper-slide.show_all h3 {
+    font-size: var(--medium_text);
+}
+
+.supplies_swiper .navigation{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 15%;
+    margin: 20px auto 0;
+}
+
+.supplies_swiper .navigation .swiper-button-next,
+.supplies_swiper .navigation .swiper-button-prev,
+.supplies_swiper .navigation .swiper-pagination {
+    position: unset;
+    top: unset;
+    left: unset;
+    right: unset;
+    bottom: unset;
+    margin: 0;
+    height: unset;
+    color: var(--green);
+}
+
+.supplies_swiper .swiper-pagination-bullet-active {
+    background-color: var(--green);
+}
+
+.supplies_swiper .navigation .swiper-pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.supplies_swiper .swiper-button-next:after,
+.supplies_swiper .swiper-button-prev:after{
+    font-size: 15px;
+    font-weight: bold
+}
+
+.cards{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: top;
+    justify-content: space-between;
+    padding: 30px;
+}
+
+.card {
+    padding: 20px;
+    margin-bottom: 20px;
+    color: var(--black);
+    text-decoration: none;
+    -webkit-box-shadow: 5px 5px 15px 0px rgba(0,0,0,0.1);
+    -moz-box-shadow: 5px 5px 15px 0px rgba(0,0,0,0.1);
+    box-shadow: 5px 5px 15px 0px rgba(0,0,0,0.1);
+    transition: var(--transition);
+}
+
+.cards.two_in_row .card{
+    width: 48%;
+    height: unset;
+}
+
+.card .status_bar {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.card .status_bar .status_item:not(:last-child){
+    margin-right: 10px;
+}
+
+.status_item.black{
+    background-color: var(--black);
+}
+
+.status_item.red{
+    background-color: var(--red);
+}
+
+.status_item.yellow{
+    background-color: var(--yellow);
+}
+
+.card.supply {
+    width: 100%
+}
+
+.card.supply .supply_info {
+    margin-bottom: 20px
+}
+
+.card .cargo_title {
+    font-size: var(--medium_text);
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
 @media(hover){
     .nav_panel .toggle_btn:hover .fas{
         color: var(--brown);
@@ -131,5 +296,16 @@ body.main{
 
     .nav_panel.toggle .toggle_btn:hover .fas{
         transform: rotate(90deg);
+    }
+
+    .card:hover {
+        -webkit-box-shadow: 5px 5px 15px 0px rgba(0,0,0,0.2);
+        -moz-box-shadow: 5px 5px 15px 0px rgba(0,0,0,0.2);
+        box-shadow: 5px 5px 15px 0px rgba(0,0,0,0.2);
+    }
+
+
+    .card:hover .supply_id{
+        background-color: var(--brown);
     }
 }

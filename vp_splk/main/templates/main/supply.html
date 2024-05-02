@@ -1,15 +1,49 @@
 {% extends 'main/main_base.html' %}
 
 {% block content %}
-<div>
-    <h1>{{ supply.id }}</h1>
-    <h2>{{ supply.name }}</h2>
-    <h3> {{ supply.start_point_address }} </h3>
-    <h3> {{ supply.end_point_address }} </h3>
-    <h4> {{ supply.time_create }}</h4>
-    <h4> {{ supply.time_update }}</h4>
+<div class="cards">
+    <div class="card supply">
+        <div class="supply_info">
+             <div class="status_bar">
+                 <div class="status_item supply_id black"># {{ supply.id }}</div>
+                 <div class="status_item status {{ status.color }} yellow"> {{ status.name }} в работе</div>
+             </div>
+            <h1 class="supply_title">{{ supply.name }}</h1>
+            <h3> <b>Заказчик:</b> {{ supply.type }} </h3>
+            <h3><b>Из:</b> {{ supply.start_point_address }}</h3>
+            <h3><b>В:</b> {{ supply.end_point_address }}</h3>
+        </div>
 
-    <a href="{{ supply.get_absolute_url }}"> подробнее</a>
+        {% if cargos %}
+        <div class="cargos">
+            <h2 class="cargo_title">Груз</h2>
+            <a href=" {{ url 'add_cargo' }}">Добавить груз</a>
+            <ul>
+                {% for cargo in cargos %}
+                <li>
+                    <p>{{ cargo.name }}</p>
+                    <p>{{ cargo.description }}</p>
+                    <p>{{ cargo.type }}</p>
+                    <p>{{ cargo.weight }}</p>
+                    <p>{{ cargo.length }}</p>
+                    <p>{{ cargo.width }}</p>
+                    <p>{{ cargo.height }}</p>
+                    <p>{{ cargo.amount }}</p>
+                    <p>{{ cargo.units }}</p>
+                    <p>{{ cargo.time_create }}</p>
+                    <p>{{ cargo.time_update }}</p>
+
+                    <a href="{{ cargo.get_absolute_url }}"> подробнее</a>
+                </li>
+                {% if not forloop.last %}
+                <hr>
+                {% endif %}
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+    </div>
 </div>
+
 
 {% endblock %}
