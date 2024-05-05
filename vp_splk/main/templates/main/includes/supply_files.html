@@ -1,0 +1,17 @@
+<!--<a href=" {% url 'add_supply_chain' supply_id %}">Добавить этап</a>-->
+
+{% if supply_files %}
+<div class="supply_chains">
+    <h2 class="cargo_title">Файлы</h2>
+    <ul>
+        {% for file in supply_files %}
+        <li>
+            <a href="/media/{{ file.file }}">{{ file.file }}</a>
+        </li>
+        {% if not forloop.last %}
+        <hr>
+        {% endif %}
+        {% endfor %}
+    </ul>
+</div>
+{% endif %}

@@ -1,0 +1,18 @@
+{% extends 'main/main_base.html' %}
+
+{% block content %}
+
+<div>
+    <p>{{ chain.name }}</p>
+    <p>{{ chain.supply }}</p>
+    <p>{{ chain.status }}</p>
+    <p>{{ chain.delivery_type }}</p>
+    <p>{{ chain.serial_number }}</p>
+    <p>{{ chain.start_point_address }}</p>
+    <p>{{ chain.end_point_address }}</p>
+    <p>{{ chain.deadline }}</p>
+    <p>{{ chain.time_create|date:'d-m-y' }}</p>
+    <p>{{ chain.time_update|date:'d-m-y' }}</p>
+</div>
+
+{% endblock %}

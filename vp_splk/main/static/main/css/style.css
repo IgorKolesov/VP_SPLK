@@ -298,14 +298,14 @@ body.main{
         transform: rotate(90deg);
     }
 
-    .card:hover {
+    a.card:hover {
         -webkit-box-shadow: 5px 5px 15px 0px rgba(0,0,0,0.2);
         -moz-box-shadow: 5px 5px 15px 0px rgba(0,0,0,0.2);
         box-shadow: 5px 5px 15px 0px rgba(0,0,0,0.2);
     }
 
 
-    .card:hover .supply_id{
+    a.card:hover .supply_id{
         background-color: var(--brown);
     }
 }

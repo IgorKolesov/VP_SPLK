@@ -1,5 +1,5 @@
 from django import forms
-from .models import Supply, Cargo
+from .models import Supply, Cargo, SupplyChain, UploadFiles
 
 min_length = 5
 
@@ -19,6 +19,26 @@ class AddNewCargo(forms.ModelForm):
     class Meta:
         model = Cargo
         fields = '__all__'
+        exclude = ['supply']
         widgets = {
             'name': forms.TextInput(attrs={'class': 'form_input'}),
         }
+
+
+class AddNewSupplyChain(forms.ModelForm):
+    class Meta:
+        model = SupplyChain
+        fields = '__all__'
+        exclude = ['supply', 'serial_number']
+        widgets = {
+            'name': forms.TextInput(attrs={'class': 'form_input'}),
+        }
+
+
+class UploadFileForm(forms.ModelForm):
+    class Meta:
+        model = UploadFiles
+        fields = ['file']
+        # widgets = {
+        #     'name': forms.TextInput(attrs={'class': 'form_input'}),
+        # }
