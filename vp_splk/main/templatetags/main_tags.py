@@ -23,7 +23,7 @@ def show_menu():
     return {'menu': views.menu}
 
 
-@register.inclusion_tag('main/includes/cargos.html')
+@register.inclusion_tag('main/includes/supply_cargos.html')
 def show_cargos(supply_id: int):
     cargo_db = Cargo.objects.filter(supply=supply_id)
     return {'supply_id': supply_id,

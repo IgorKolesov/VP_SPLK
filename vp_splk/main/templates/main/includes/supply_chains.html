@@ -1,26 +1,34 @@
-<a href=" {% url 'add_supply_chain' supply_id %}">Добавить этап</a>
-{% if supply_chains %}
 <div class="supply_chains">
     <h2 class="cargo_title">Этапы доставки</h2>
-    <ul>
+
+    <table class="table_styles cargo">
+        <tr>
+            <th>№</th>
+            <th>Название</th>
+            <th>Статус</th>
+            <th>Тип</th>
+            <th>Начальная точка</th>
+            <th>Конечная точка</th>
+            <th>Крайний срок</th>
+            {% if supply_chains %}
+            <th></th>
+            {% endif %}
+        </tr>
+        {% if supply_chains %}
         {% for chain in supply_chains %}
-        <li>
-            <p>{{ chain.name }}</p>
-            <p>{{ chain.supply }}</p>
-            <p>{{ chain.status }}</p>
-            <p>{{ chain.delivery_type }}</p>
-            <p>{{ chain.serial_number }}</p>
-            <p>{{ chain.start_point_address }}</p>
-            <p>{{ chain.end_point_address }}</p>
-            <p>{{ chain.time_create }}</p>
-            <p>{{ chain.time_update }}</p>
-            <p>{{ chain.deadline }}</p>
-            <a href="{{ chain.get_absolute_url }}">подробнее</a>
-        </li>
-        {% if not forloop.last %}
-        <hr>
-        {% endif %}
+        <tr>
+            <td>{{ chain.serial_number }}</td>
+            <td>{{ chain.name }}</td>
+            <td>{{ chain.status }}</td>
+            <td>{{ chain.delivery_type }}</td>
+            <td>{{ chain.start_point_address }}</td>
+            <td>{{ chain.end_point_address }}</td>
+            <td>{{ chain.deadline }}</td>
+            <td><a href="{% url 'edit_chain' supply_id chain.id %}">изменить</a></td>
+        </tr>
         {% endfor %}
-    </ul>
+        {% endif %}
+    </table>
+
+<a href=" {% url 'add_supply_chain' supply_id %}" class="add_new_item">Добавить этап</a>
 </div>
-{% endif %}

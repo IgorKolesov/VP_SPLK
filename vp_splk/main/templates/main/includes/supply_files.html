@@ -5,12 +5,9 @@
     <h2 class="cargo_title">Файлы</h2>
     <ul>
         {% for file in supply_files %}
-        <li>
-            <a href="/media/{{ file.file }}">{{ file.file }}</a>
+        <li class="file_link">
+            <a href="/media/{{ file.file }}" class="">{{ file.file }}</a>
         </li>
-        {% if not forloop.last %}
-        <hr>
-        {% endif %}
         {% endfor %}
     </ul>
 </div>

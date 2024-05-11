@@ -30,6 +30,6 @@ class SupplyChain(models.Model):
 
 
     def get_absolute_url(self):
-        return reverse('supply_chain', kwargs={'supply_id': self.supply_id, 'supply_chain_serial_number': self.serial_number})
+        return reverse('supply_chain', kwargs={'supply_id': self.supply_id, 'supply_chain_id': self.id})
 
 

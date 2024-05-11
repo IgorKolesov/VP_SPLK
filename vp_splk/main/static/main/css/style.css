@@ -9,6 +9,7 @@
     --medium_text: 20px;
     --large_text: 30px;
     --transition: all 0.2s ease-in-out;
+    --border_r: 10px;
 }
 
 * {
@@ -130,13 +131,14 @@ body.main{
     margin-right: 0;
 }
 
-.nav_panel .nav_item.active_page_link {
+.nav_panel .nav_item.active_page_link,
+.list_pages .page_num.current {
     pointer-events: none;
     cursor: default;
     color: var(--brown);
 }
 
-.swiper.supplies_swiper {
+.swiper.swiper_styles {
     width: 100%;
     height: auto;
     padding: 30px 30px 50px;
@@ -147,10 +149,15 @@ body.main{
     width: 83%;
     margin-left: auto;
     flex-direction: column;
+    transition: var(--transition);
+}
+
+.main .content.wide {
+    width: 93%;
 }
 
 .card .status_item{
-    border-radius: 10px;
+    border-radius: var(--border_r);
     color: var(--white);
     width: max-content;
     padding: 10px;
@@ -163,7 +170,7 @@ body.main{
     margin-bottom: 20px;
 }
 
-.supplies_swiper .swiper-slide{
+.swiper_styles .swiper-slide{
     padding: 20px;
     color: var(--black);
     text-decoration: none;
@@ -174,17 +181,17 @@ body.main{
 
 }
 
-.supplies_swiper .swiper-slide.show_all {
+.swiper_styles .swiper-slide.show_all {
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.supplies_swiper .swiper-slide.show_all h3 {
+.swiper_styles .swiper-slide.show_all h3 {
     font-size: var(--medium_text);
 }
 
-.supplies_swiper .navigation{
+.swiper_styles .navigation{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -193,9 +200,9 @@ body.main{
     margin: 20px auto 0;
 }
 
-.supplies_swiper .navigation .swiper-button-next,
-.supplies_swiper .navigation .swiper-button-prev,
-.supplies_swiper .navigation .swiper-pagination {
+.swiper_styles .navigation .swiper-button-next,
+.swiper_styles .navigation .swiper-button-prev,
+.swiper_styles .navigation .swiper-pagination {
     position: unset;
     top: unset;
     left: unset;
@@ -206,18 +213,18 @@ body.main{
     color: var(--green);
 }
 
-.supplies_swiper .swiper-pagination-bullet-active {
+.swiper_styles .swiper-pagination-bullet-active {
     background-color: var(--green);
 }
 
-.supplies_swiper .navigation .swiper-pagination {
+.swiper_styles .navigation .swiper-pagination {
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.supplies_swiper .swiper-button-next:after,
-.supplies_swiper .swiper-button-prev:after{
+.swiper_styles .swiper-button-next:after,
+.swiper_styles .swiper-button-prev:after{
     font-size: 15px;
     font-weight: bold
 }
@@ -284,6 +291,73 @@ body.main{
     margin-bottom: 20px;
 }
 
+.table_styles {
+    width: 100%;
+    overflow: auto;
+}
+
+.table_styles th{
+    background-color: var(--green);
+    color: var(--white);
+    text-align: center;
+    margin: auto 0;
+}
+
+.table_styles th,
+.table_styles td {
+    border: 1px solid var(--black);
+    padding: 10px 5px;
+}
+
+.add_new_item {
+    margin: 10px 0 10px auto;
+    text-decoration: none;
+    padding: 10px 15px;
+    background-color: var(--light_brown);
+    display: block;
+    width: max-content;
+    color: var(--black);
+    border-radius: var(--border_r);
+    font-weight: bold;
+}
+
+.file_link {
+    display: inline-block;
+    padding: 0 10px 10px 0;
+    width: max-content;
+
+}
+
+.list_pages ul{
+    display: flex;
+    flex-direction: row;
+    width: max-content;
+    margin: 0 auto;
+}
+
+.list_pages .page_num {
+    padding: 10px;
+    background-color: transparent;
+    margin-right: 10px;
+    border: 1px solid var(--black);
+    transition: var(--transition);
+    text-decoration: none;
+    color: var(--black);
+}
+
+.list_pages li:last-child .page_num{
+    margin-right: 0;
+}
+
+.list_pages .page_num.current{
+    background-color: var(--green);
+    color: var(--white);
+}
+
+.list_pages .page_num.current{
+    color: var(--white);
+}
+
 @media(hover){
     .nav_panel .toggle_btn:hover .fas{
         color: var(--brown);
@@ -306,6 +380,10 @@ body.main{
 
 
     a.card:hover .supply_id{
+        background-color: var(--brown);
+    }
+
+    .list_pages .page_num:not(.current):hover{
         background-color: var(--brown);
     }
 }

@@ -5,8 +5,48 @@
 <h1>{{ title }}</h1>
 
 <div class="cards two_in_row">
-          {% show_supplies %}
+    {% for supply in supplies %}
+    <a href="{{ supply.get_absolute_url }}" class="swiper-slide card">
+        <div class="status_bar">
+              <div class="status_item supply_id black"># {{ supply.id }}</div>
+              <div class="status_item status {{ status.color }} yellow"> {{ status.name }} в работе</div>
+        </div>
+        <h2 class="supply_title">{{ supply.name }}</h2>
+        <h3> <b>Заказчик:</b> {{ supply.type }} </h3>
+        <h3><b>Из:</b> {{ supply.start_point_address }}</h3>
+        <h3><b>В:</b> {{ supply.end_point_address }}</h3>
+    </a>
+    {% endfor %}
 </div>
 
-
 {% endblock %}
+
+{% block navigation %}
+{% if page_obj.has_other_pages %}
+<nav class="list_pages">
+    <ul class="">
+        {% if page_obj.has_previous %}
+        <li>
+            <a href="?page={{ page_obj.previous_page_number }}" class="page_num">&lt;</a>
+        </li>
+        {% endif %}
+
+
+        {% for p in paginator.page_range %}
+            {% if p >= page_obj.number|add:-2 and p <= page_obj.number|add:2 %}
+            <li class="">
+                <a href="?page={{ p }}" class="page_num {% if page_obj.number == p %} current {% endif %}">{{ p }}</a>
+            </li>
+            {% endif %}
+        {% endfor %}
+
+        {% if page_obj.has_next %}
+        <li>
+            <a href="?page={{ page_obj.next_page_number }}" class="page_num">&gt;</a>
+        </li>
+        {% endif %}
+    </ul>
+</nav>
+{% endif %}
+{% endblock %}
+

@@ -1,0 +1,36 @@
+<h2 class="cargo_title">Груз</h2>
+
+<table class="table_styles cargo">
+  <tr>
+      <th>Название</th>
+      <th>Описание</th>
+      <th>Тип</th>
+      <th>Вес</th>
+      <th>Длина</th>
+      <th>Ширина</th>
+      <th>Высота</th>
+      <th>Кол-во</th>
+      <th>Ед. изм.</th>
+      {% if cargos %}
+      <th></th>
+        {% endif %}
+  </tr>
+  {% if cargos %}
+  {% for cargo in cargos %}
+  <tr>
+      <td>{{ cargo.name }}</td>
+      <td>{{ cargo.description }}</td>
+      <td>{{ cargo.type }}</td>
+      <td>{{ cargo.weight }}</td>
+      <td>{{ cargo.length }}</td>
+      <td>{{ cargo.width }}</td>
+      <td>{{ cargo.height }}</td>
+      <td>{{ cargo.amount }}</td>
+      <td>{{ cargo.units }}</td>
+      <td><a href="{% url 'edit_cargo' supply_id cargo.id %}">изменить</a></td>
+  </tr>
+  {% endfor %}
+    {% endif %}
+
+</table>
+<a href=" {% url 'add_cargo' supply_id %}" class="add_new_item">Добавить груз</a>
