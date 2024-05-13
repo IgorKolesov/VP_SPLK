@@ -8,7 +8,7 @@ from vp_splk.views import page_not_found
 urlpatterns = [
     path("admin/", admin.site.urls),
     path('', include('title.urls')),
-    path('users/', include('users.urls')),
+    path('users/', include('users.urls', namespace='users')),
     path('main/', include('main.urls')),
     path('__debug__/', include('debug_toolbar.urls')),
 ]

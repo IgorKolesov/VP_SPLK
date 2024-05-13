@@ -7,13 +7,34 @@
         <ul>
         {% for item in menu %}
             <li>
+                {% if item.url_name == 'add_supply' %}
+                    {% if perms.main.add_supply %}
+                    <a href="{% url item.url_name %}" class="nav_item" title="{{ item.title }}">
+                        <div class="nav_icon"><i class="fas {{ item.icon}}"></i></div>
+                        <div class="nav_title">{{ item.title }}</div>
+                    </a>
+                    {% endif %}
+                {% else %}
                 <a href="{% url item.url_name %}" class="nav_item" title="{{ item.title }}">
-                    <div class="nav_icon"><i class="fas {{ item.icon}}"></i></div>
-                    <div class="nav_title">{{ item.title }}</div>
+                        <div class="nav_icon"><i class="fas {{ item.icon}}"></i></div>
+                        <div class="nav_title">{{ item.title }}</div>
                 </a>
+
+                {% endif %}
             </li>
-            {% if not forloop.last %} <hr> {% endif %}
         {% endfor %}
         </ul>
     </nav>
+
+
+
+    {% if user.is_authenticated %}
+    <div class="user_info">
+        <a href="{% url 'users:profile' %}" class="nav_item" title="Личный кабинет">
+            <div class="nav_icon"><i class="fas fa-user"></i></div>
+            <div class="nav_title">{{ user.first_name }} {{ user.last_name }}</div>
+        </a>
+        <a class="exit_btn" href="{% url 'users:logout' %}">Выйти</a>
+    </div>
+    {% endif %}
 </div>

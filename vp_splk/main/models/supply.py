@@ -1,3 +1,6 @@
+from datetime import date
+
+from django.contrib.auth import get_user_model
 from django.db import models
 from django.urls import reverse
 
@@ -18,13 +21,14 @@ class Supply(models.Model):
         NON_ACTIVE = 0, 'Завершена'
 
     name = models.CharField(max_length=100, verbose_name='Название')
-    # employee_id =
-    # client_id =
+    employee = models.ForeignKey(get_user_model(), on_delete=models.SET_NULL, null=True, default=None, verbose_name='Ответственный', related_name='supplies_as_employee')
+    client = models.ForeignKey(get_user_model(), on_delete=models.SET_NULL, null=True, default=None, verbose_name='Клиент', related_name='supplies_as_client')
     start_point_address = models.CharField(max_length=250, verbose_name='Откуда')
     end_point_address = models.CharField(max_length=250, verbose_name='Куда')
     time_create = models.DateTimeField(auto_now_add=True, verbose_name='Время создания')
     time_update = models.DateTimeField(auto_now=True, verbose_name='Время последнего изменения')
     is_active = models.BooleanField(choices=SupplyStatus.choices, default=SupplyStatus.ACTIVE, verbose_name='Статус доставки')
+    deadline = models.DateTimeField(verbose_name='Крайний срок', default=date.today(), null=False)
 
     objects = models.Manager()
     active = ActiveSuppliesManager()

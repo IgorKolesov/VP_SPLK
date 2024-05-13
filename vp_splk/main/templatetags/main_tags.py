@@ -1,4 +1,6 @@
 from django import template
+from django.contrib.auth import get_user_model
+
 import main.views as views
 from main.models import Supply, SupplyChain, UploadFiles
 from main.models import Cargo
@@ -19,26 +21,32 @@ def show_recent_supplies():
 
 
 @register.inclusion_tag('main/includes/nav_panel.html')
-def show_menu():
-    return {'menu': views.menu}
+def show_menu(user, perms):
+    return {'menu': views.menu, 'user': user, 'perms': perms}
 
 
 @register.inclusion_tag('main/includes/supply_cargos.html')
-def show_cargos(supply_id: int):
+def show_cargos(supply_id: int, perms):
     cargo_db = Cargo.objects.filter(supply=supply_id)
     return {'supply_id': supply_id,
-            'cargos': cargo_db}
+            'cargos': cargo_db,
+            'perms': perms,
+            }
 
 
 @register.inclusion_tag('main/includes/supply_chains.html')
-def show_chains(supply_id: int):
+def show_chains(supply_id: int, perms):
     chain_db = SupplyChain.objects.filter(supply=supply_id)
     return {'supply_id': supply_id,
-            'supply_chains': chain_db}
+            'supply_chains': chain_db,
+            'perms': perms,
+            }
 
 
 @register.inclusion_tag('main/includes/supply_files.html')
-def show_files(supply_id: int):
+def show_files(supply_id: int, perms):
     files_db = UploadFiles.objects.filter(supply=supply_id, supply_chain_id=None)
     return {'supply_id': supply_id,
-            'supply_files': files_db}
+            'supply_files': files_db,
+            'perms': perms,
+            }

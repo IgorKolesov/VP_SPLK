@@ -1,12 +1,13 @@
-<!--<a href=" {% url 'add_supply_chain' supply_id %}">Добавить этап</a>-->
-
 {% if supply_files %}
-<div class="supply_chains">
-    <h2 class="cargo_title">Файлы</h2>
+<div class="supply_files">
+    <h2 class="">Файлы</h2>
     <ul>
         {% for file in supply_files %}
         <li class="file_link">
-            <a href="/media/{{ file.file }}" class="">{{ file.file }}</a>
+            <a href="/media/{{ file.file }}" class="file_link">
+                <i class="far fa-file"></i> <!-- Иконка файла (например, используя FontAwesome) -->
+                {{ file.file }} <!-- Отображение имени файла без пути -->
+            </a>
         </li>
         {% endfor %}
     </ul>

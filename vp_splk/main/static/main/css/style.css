@@ -3,9 +3,12 @@
     --green: #116466;
     --black: #2c3531;
     --brown: #d9b08c;
+    --gray: #808080;
+    --brown_bg: rgba(217, 176, 140, 0.2);
     --light_brown: #ffcb9a;
     --red: #E32636;
     --yellow: #daa520;
+    --small_text: 14px;
     --medium_text: 20px;
     --large_text: 30px;
     --transition: all 0.2s ease-in-out;
@@ -44,6 +47,13 @@ body.main{
     position: fixed;
     transition: var(--transition);
     flex-shrink: 0;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.nav_panel .user_info{
+    margin-top: auto;
 }
 
 .nav_panel .toggle_btn{
@@ -85,6 +95,8 @@ body.main{
     align-items: center;
     padding: 10px 20px;
     transition: var(--transition);
+    border: 1px solid var(--white);
+    margin-bottom: 20px;
 }
 
 .nav_panel .nav_item .nav_icon{
@@ -136,6 +148,7 @@ body.main{
     pointer-events: none;
     cursor: default;
     color: var(--brown);
+    border: 1px solid var(--brown);
 }
 
 .swiper.swiper_styles {
@@ -150,13 +163,14 @@ body.main{
     margin-left: auto;
     flex-direction: column;
     transition: var(--transition);
+    padding: 0 20px;
 }
 
 .main .content.wide {
     width: 93%;
 }
 
-.card .status_item{
+.status_item {
     border-radius: var(--border_r);
     color: var(--white);
     width: max-content;
@@ -277,6 +291,10 @@ body.main{
     background-color: var(--yellow);
 }
 
+.status_item.gray{
+    background-color: var(--gray);
+}
+
 .card.supply {
     width: 100%
 }
@@ -358,6 +376,309 @@ body.main{
     color: var(--white);
 }
 
+/* Общие стили для формы */
+form {
+    display: flex;
+    flex-direction: column;
+    width: 600px;
+    margin: 0 auto;
+    padding: 20px 0;
+}
+
+/* Стили для заголовка формы */
+h1 {
+    margin-top: 30px;
+    color: var(--black);
+    font-size: var(--large_text);
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+/* Стили для блока с ошибками */
+.form-error {
+    color: var(--red);
+    margin-bottom: 10px;
+}
+
+/* Стили для блока с вводом данных */
+.input_block {
+    margin-bottom: 10px;
+}
+
+/* Стили для метки */
+.form-label {
+    display: block;
+    color: var(--black);
+    font-size: var(--medium_text);
+    margin-bottom: 5px;
+}
+
+/* Стили для поля ввода */
+input[type="text"],
+input[type="number"],
+input[type="email"],
+input[type="password"],
+textarea {
+    width: 100%;
+    padding: 10px;
+    border: 2px solid var(--black);
+    border-radius: var(--border_r);
+    font-size: var(--small_text);
+    transition: var(--transition);
+}
+
+/* Стили для поля ввода при фокусе */
+input[type="number"]:focus,
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus,
+textarea:focus {
+    outline: none;
+    border-color: var(--brown);
+    background-color: var(--brown_bg);
+}
+
+/* Стили для кнопки отправки */
+button[type="submit"] {
+    width: max-content;
+    margin: auto;
+    background-color: var(--green);
+    color: var(--white);
+    border: none;
+    padding: 10px 30px;
+    font-size: var(--small_text);
+    cursor: pointer;
+    transition: var(--transition);
+    font-weight: lighter;
+    border-radius: var(--border_r);
+}
+
+/* Стили для кнопки отправки при наведении */
+button[type="submit"]:hover {
+    background-color: var(--light_brown);
+    color: var(--black);
+}
+
+/* Стили для элемента выбора select */
+select {
+    width: 100%;
+    padding: 10px;
+    border: 2px solid var(--black);
+    border-radius: var(--border_r);
+    font-size: var(--small_text);
+    background-color: var(--white);
+    appearance: none; /* Скрыть стандартную стрелку выбора */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='%23343a40'%3E%3Cpath d='M14.854 8.854a.5.5 0 0 1 0 .707l-4 4a.5.5 0 0 1-.707 0l-4-4a.5.5 0 0 1 .707-.707L10 12.293l4.146-4.147a.5.5 0 0 1 .708 0z'/%3E%3C/svg%3E"); /* Добавить кастомную стрелку */
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 20px;
+    transition: var(--transition);
+    margin-bottom: 5px !important;
+}
+
+ select.date_select{
+    width: 32%;
+    margin-right: 6px;
+}
+
+/* Стили для элемента выбора select при наведении */
+select:hover {
+    border-color: var(--green);
+}
+
+/* Стили для элемента выбора select при фокусе */
+select:focus {
+    outline: none;
+     border-color: var(--brown);
+    background-color: var(--brown_bg);
+}
+
+/* Стили для стрелки выбора */
+select::-ms-expand {
+    display: none; /* Убрать стандартную стрелку для IE 11 */
+}
+
+
+/* Стили для блока с файлами */
+.supply_files {
+    margin-top: 20px;
+}
+
+/* Стили для заголовка */
+h2 {
+    font-size: 24px;
+    color: var(--black);
+    margin-bottom: 20px;
+}
+
+/* Стили для списка файлов */
+.supply_files ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+/* Стили для ссылок на файлы */
+.file_link {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    text-decoration: none;
+    color: var(--black);
+    padding: 0;
+}
+
+.file_link:hover {
+    color: var(--green); /* Цвет при наведении */
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+/* Стили для иконки файла */
+.file_link i {
+    margin-right: 10px;
+    font-size: 20px;
+}
+
+/* Стили для имени файла */
+.file_link span {
+    font-size: 16px;
+}
+
+
+/* Стили для формы */
+.file_form {
+    margin-top: 20px;
+}
+
+/* Стили для сообщения об ошибке формы */
+.form-error {
+    color: var(--red); /* Цвет текста */
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+/* Стили для метки */
+.form-label {
+    font-size: 16px;
+    color: var(--black);
+    margin-bottom: 5px;
+}
+
+/* Стили для поля ввода файла */
+input[type="file"] {
+    border: 1px solid var(--brown); /* Цвет рамки */
+    border-radius: var(--border_r); /* Радиус скругления углов */
+    padding: 10px;
+    width: 100%;
+    font-size: 16px;
+    transition: var(--transition); /* Плавное изменение стилей */
+}
+
+/* Стили для поля ввода файла при фокусе */
+input[type="file"]:focus {
+    outline: none; /* Убираем обводку при фокусе */
+    border-color: var(--green); /* Цвет рамки при фокусе */
+}
+
+
+form.file_form,
+form.comment_form{
+    margin-left: 0;
+    margin-top: -20px;
+}
+
+form.file_form .input_block {
+ margin-bottom: 0px;
+}
+
+form.file_form button[type="submit"] {
+    margin-left: 0;
+}
+
+
+/* Стили для блока комментариев */
+.supply_comments {
+    width: 600px;
+}
+
+/* Стили для списка комментариев */
+.supply_comments ul {
+    list-style-type: none; /* Убираем маркеры списка */
+    padding: 0;
+}
+
+/* Стили для отдельного комментария */
+.supply_comments .comment {
+    margin-bottom: 15px;
+    padding: 10px;
+    background-color: var(--brown_bg); /* Цвет фона комментария */
+    border-radius: var(--border_r);
+    transition: var(--transition); /* Плавное изменение стилей */
+}
+
+/* Стили для текста комментария */
+.supply_comments .сomment_text {
+    font-size: var(--small_text); /* Размер шрифта */
+    color: var(--black); /* Цвет текста */
+    margin-bottom: 5px;
+}
+
+/* Стили для даты комментария */
+.supply_comments .comment-date {
+    font-size: 14px;
+    color: var(--green); /* Цвет текста */
+    text-align: right;
+}
+
+.status_item.edit_btn {
+    color: var(--black);
+    background-color: var(--light_brown);
+    text-decoration: none;
+    margin-left: auto;
+    font-weight: bold;
+}
+
+.chain_info {
+
+}
+
+.chain_info .filed_name {
+    font-weight: bold;
+    margin-bottom: 5px;
+    font-size: var(--medium_text);
+}
+
+.chain_info .filed_text {
+    font-size: var(--small_text);
+}
+
+.chain_info li {
+    margin-bottom: 20px;
+}
+
+.exit_btn {
+    color: var(--white);
+    text-decoration: none;
+    text-align: center;
+    display: block;
+    margin-top: -10px;
+}
+
+.change_pass{
+    color: var(--black);
+    text-decoration: none;
+    text-align: center;
+    margin: 0 auto;
+    display: block;
+    margin-top: 10px;
+}
+
+.change_pass:hover,
+.exit_btn:hover {
+    text-decoration:underline;
+}
+
+
 @media(hover){
     .nav_panel .toggle_btn:hover .fas{
         color: var(--brown);
@@ -366,6 +687,7 @@ body.main{
 
     .nav_panel .nav_item:hover {
         color: var(--brown);
+        border: 1px solid var(--brown);
     }
 
     .nav_panel.toggle .toggle_btn:hover .fas{

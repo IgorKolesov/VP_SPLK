@@ -9,15 +9,16 @@ class Cargo(models.Model):
         kilo = 'кг', 'килограммы'
         unit = 'шт', 'штуки'
         litre = 'л', 'литры'
+        pallet = 'паллет', 'паллет'
 
     name = models.CharField(max_length=250, verbose_name='Название')
     supply = models.ForeignKey(Supply, on_delete=models.CASCADE, verbose_name='Доставка')
     description = models.CharField(max_length=500, verbose_name='Описание груза')
     type = models.CharField(max_length=250, verbose_name='Тип груза')
-    weight = models.FloatField(default=0, verbose_name='Вес')
-    length = models.FloatField(default=0, verbose_name='Длина')
-    width = models.FloatField(default=0, verbose_name='Ширина')
-    height = models.FloatField(default=0, verbose_name='Высота')
+    weight = models.FloatField(default=0, verbose_name='Вес (кг)')
+    length = models.FloatField(default=0, verbose_name='Длина (м)')
+    width = models.FloatField(default=0, verbose_name='Ширина (м)')
+    height = models.FloatField(default=0, verbose_name='Высота (м)')
     amount = models.IntegerField(default=1, verbose_name='Количество')
     units = models.CharField(choices=Units.choices, default=Units.unit, verbose_name='Единицы измерения')
     time_create = models.DateTimeField(auto_now_add=True)

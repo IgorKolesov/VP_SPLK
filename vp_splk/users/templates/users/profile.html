@@ -17,6 +17,9 @@
     </div>
     {% endfor %}
 
-    <button type="submit">Создать</button>
+    <button type="submit">Сохранить</button>
 </form>
+
+<a class="change_pass" href="{% url 'users:password_change' %}">Сменить пароль</a>
+
 {% endblock %}

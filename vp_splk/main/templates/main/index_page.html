@@ -1,17 +1,28 @@
-{% extends 'main/main_base.html' %}
+{% extends 'main_base.html' %}
 {% load main_tags %}
 
 {% block content %}
 <h1>{{ title }}</h1>
 
-
+{% if supplies %}
 <!-- Slider main container -->
 <div class="swiper supplies_swiper swiper_styles">
   <!-- Additional required wrapper -->
   <div class="swiper-wrapper">
     <!-- Slides -->
 
-      {% show_recent_supplies %}
+      {% for supply in supplies %}
+      <a href="{{ supply.get_absolute_url }}" class="swiper-slide card">
+            <div class="status_bar">
+                  <div class="status_item supply_id black"># {{ supply.id }}</div>
+                  <div class="status_item status {{ status.color }} yellow"> {{ status.name }} в работе</div>
+            </div>
+            <h2 class="supply_title">{{ supply.name }}</h2>
+            <h3> <b>Заказчик:</b> {{ supply.type }} </h3>
+            <h3><b>Из:</b> {{ supply.start_point_address }}</h3>
+            <h3><b>В:</b> {{ supply.end_point_address }}</h3>
+      </a>
+      {% endfor %}
 
       <a href="{% url 'supplies' %}" class="swiper-slide show_all card">
             <h3><b>Смотреть все</b></h3>
@@ -25,5 +36,6 @@
         <div class="swiper-button-next"></div>
     </div>
 </div>
+{% endif %}
 
 {% endblock %}

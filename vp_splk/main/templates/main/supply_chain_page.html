@@ -1,18 +1,104 @@
-{% extends 'main/main_base.html' %}
+{% extends 'main_base.html' %}
 
 {% block content %}
+<div class="cards">
+<div class="card supply">
+    <div class="supply_info">
+             <div class="status_bar">
+                 <div class="status_item supply_id black"># {{ chain.id }}</div>
+                 <div class="status_item status {{ chain.status.color }}">{{ chain.status }}</div>
+                 <a class="status_item edit_btn" href="{% url 'edit_chain' chain.supply_id chain.id %}">Редактировать этап доставки</a>
+             </div>
 
-<div>
-    <p>{{ chain.name }}</p>
-    <p>{{ chain.supply }}</p>
-    <p>{{ chain.status }}</p>
-    <p>{{ chain.delivery_type }}</p>
-    <p>{{ chain.serial_number }}</p>
-    <p>{{ chain.start_point_address }}</p>
-    <p>{{ chain.end_point_address }}</p>
-    <p>{{ chain.deadline }}</p>
-    <p>{{ chain.time_create|date:'d-m-y' }}</p>
-    <p>{{ chain.time_update|date:'d-m-y' }}</p>
+<h1 class="supply_title">{{ chain.name }}</h1>
+
+<div class="chain_info">
+    <ul>
+         <li>
+            <div class="filed_name">Тип</div>
+            <div class="filed_text">{{ chain.delivery_type }}</div>
+        </li>
+        <li>
+            <div class="filed_name">Контрагент</div>
+            <div class="filed_text">{{ chain.contractor }}</div>
+        </li>
+         <li>
+            <div class="filed_name">Начальная точка</div>
+            <div class="filed_text">{{ chain.start_point_address }}</div>
+        </li>
+         <li>
+            <div class="filed_name">Конечная точка</div>
+            <div class="filed_text">{{ chain.end_point_address }}</div>
+        </li>
+         <li>
+            <div class="filed_name">Крайний срок</div>
+            <div class="filed_text">{{ chain.deadline }}</div>
+        </li>
+    </ul>
 </div>
 
+
+{% if supply_files %}
+<div class="supply_files">
+    <h2 class="">Файлы</h2>
+    <ul>
+        {% for file in supply_files %}
+        <li class="file_link">
+            <a href="/media/{{ file.file }}" class="file_link">
+                <i class="far fa-file"></i> <!-- Иконка файла (например, используя FontAwesome) -->
+                {{ file.file }} <!-- Отображение имени файла без пути -->
+            </a>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+{% endif %}
+
+
+<form method="post" action="" class="file_form" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    <div class="form-error"> {{ file_form.non_field_errors }} </div>
+
+    {% for f in file_form %}
+    <div class="input_block">
+        <label class="form-label" for="{{ f.id_for_label }}"></label>
+        {{ f }}
+        <div class="form-error">{{ f.errors }} </div>
+    </div>
+    {% endfor %}
+
+    <button type="submit">Сохранить</button>
+</form>
+
+
+{% if supply_chain_comments %}
+<div class="supply_comments">
+    <h2 class="">Комментарии</h2>
+    <ul>
+        {% for comment in supply_chain_comments %}
+        <li class="comment">
+            <div class="сomment_text">{{ comment.comment_text }}</div>
+            <div class="comment-date">{{ comment.time_create }}</div>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+{% endif %}
+
+<form action="" class="comment_form" method="post">
+            {% csrf_token %}
+    <div class="form-error"> {{ comment_form.non_field_errors }} </div>
+
+    {% for f in comment_form %}
+    <label class="form-label" for="{{ f.id_for_label }}"></label>
+    {{ f }}
+    <div class="form-error">{{ f.errors }} </div>
+    {% endfor %}
+
+    <p><button type="submit">Отправить</button></p>
+
+        </form>
+</div>
+    </div>
 {% endblock %}

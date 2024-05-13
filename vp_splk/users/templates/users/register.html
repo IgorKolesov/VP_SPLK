@@ -13,10 +13,15 @@
     <div class="input_block">
         <label class="form-label" for="{{ f.id_for_label }}">{{ f.label }}</label>
         {{ f }}
+
+        {% if f.id_for_label == 'id_company' %}
+        <a class="change_pass" href="{% url 'users:new_company' %}" title="Добавить новую компанию">Добавить новую компанию</a>
+    {% endif %}
+
         <div class="form-error">{{ f.errors }} </div>
     </div>
     {% endfor %}
 
-    <button type="submit">Создать</button>
+    <button type="submit">Зарегистрироваться</button>
 </form>
 {% endblock %}

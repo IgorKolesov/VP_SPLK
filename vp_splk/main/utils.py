@@ -1,4 +1,7 @@
-class DataMixin:
+from django.contrib.auth.mixins import LoginRequiredMixin
+
+
+class DataMixin(LoginRequiredMixin):
     # fields = '__all__'
     # form_class = None
     title = None

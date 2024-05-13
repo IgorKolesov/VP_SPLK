@@ -1,4 +1,4 @@
-{% extends 'main/main_base.html' %}
+{% extends 'main_base.html' %}
 {% load main_tags %}
 
 {% block content %}
@@ -8,31 +8,99 @@
              <div class="status_bar">
                  <div class="status_item supply_id black"># {{ supply.id }}</div>
                  <div class="status_item status {{ status.color }} yellow">{{ status.name }} в работе</div>
+                 <a class="status_item edit_btn" href="{% url 'edit_supply' supply.pk %}">Редактировать доставку</a>
              </div>
+
             <h1 class="supply_title">{{ supply.name }}</h1>
-            <h3> <b>Заказчик:</b> {{ supply.type }} </h3>
-            <h3><b>Из:</b> {{ supply.start_point_address }}</h3>
-            <h3><b>В:</b> {{ supply.end_point_address }}</h3>
-            <a href="{% url 'edit_supply' supply.id %}">изменить</a>
+
+            <div class="chain_info">
+                <ul>
+                     <li>
+                        <div class="filed_name">Заказчик</div>
+                        <div class="filed_text">{{ supply.client }}</div>
+                    </li>
+                     <li>
+                        <div class="filed_name">Начальная точка</div>
+                        <div class="filed_text">{{ supply.start_point_address }}</div>
+                    </li>
+                     <li>
+                        <div class="filed_name">Конечная точка</div>
+                        <div class="filed_text">{{ supply.end_point_address }}</div>
+                    </li>
+                     <li>
+                        <div class="filed_name">Крайний срок</div>
+                        <div class="filed_text">{{ supply.deadline }}</div>
+                    </li>
+                </ul>
+            </div>
+
         </div>
 
+        {% show_cargos supply.pk perms %}
+        {% show_chains supply.pk perms %}
+        {% show_files supply.pk perms %}
+
+        {% if supply_files %}
+<div class="supply_files">
+    <h2 class="">Файлы</h2>
+    <ul>
+        {% for file in supply_files %}
+        <li class="file_link">
+            <a href="/media/{{ file.file }}" class="file_link">
+                <i class="far fa-file"></i> <!-- Иконка файла (например, используя FontAwesome) -->
+                {{ file.file }} <!-- Отображение имени файла без пути -->
+            </a>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+{% endif %}
 
 
-        {% show_cargos supply.id %}
-        {% show_chains supply.id %}
-        {% show_files supply.id %}
+<form method="post" action="" class="file_form" enctype="multipart/form-data">
+    {% csrf_token %}
 
-        <form action="" method="post" enctype="multipart/form-data">
+    <div class="form-error"> {{ file_form.non_field_errors }} </div>
+
+    {% for f in file_form %}
+    <div class="input_block">
+        <label class="form-label" for="{{ f.id_for_label }}"></label>
+        {{ f }}
+        <div class="form-error">{{ f.errors }} </div>
+    </div>
+    {% endfor %}
+
+    <button type="submit">Сохранить</button>
+</form>
+
+
+{% if supply_chain_comments %}
+<div class="supply_comments">
+    <h2 class="">Комментарии</h2>
+    <ul>
+        {% for comment in supply_chain_comments %}
+        <li class="comment">
+            <div class="сomment_text">{{ comment.comment_text }}</div>
+            <div class="comment-date">{{ comment.time_create }}</div>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+{% endif %}
+
+<form action="" class="comment_form" method="post">
             {% csrf_token %}
-            <div class="form-error"> {{ form.non_field_errors }} </div>
+            <div class="form-error"> {{ comment_form.non_field_errors }} </div>
 
-            {% for f in form %}
-            <p><label class="form-label" for="{{ f.id_for_label }}">{{ f.label }}</label> {{ f }}</p>
+            {% for f in comment_form %}
+            <label class="form-label" for="{{ f.id_for_label }}"></label>
+            {{ f }}
             <div class="form-error">{{ f.errors }} </div>
             {% endfor %}
 
-            <p><button type="submit">отправить</button></p>
+            <p><button type="submit">Отправить</button></p>
         </form>
+
 
     </div>
 </div>

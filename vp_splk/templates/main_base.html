@@ -6,7 +6,6 @@
 <head>
     <meta charset="UTF-8">
     <title>{{ title|default:'Страница' }}</title>
-    <link type="text/css" href="{% static 'main/css/style.css' %}" rel='stylesheet' />
 
 
     <link type="text/css" href="{% static '/css/reset.css' %}" rel='stylesheet' />
@@ -15,10 +14,14 @@
     <link href="https://fonts.googleapis.com/css2?family=Jura:wght@300..700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+
+    <link type="text/css" href="{% static 'main/css/style.css' %}" rel='stylesheet' />
+
 </head>
 <body class="main">
 
-{% show_menu %}
+{% show_menu user perms %}
+
 
 <div class="content">
 {% block content %} {% endblock %}
