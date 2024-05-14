@@ -11,7 +11,7 @@
             <th>Конечная точка</th>
             <th>Исполнитель</th>
             <th>Крайний срок</th>
-            {% if supply_chains and perms.main.change_supply_chains %}
+            {% if supply_chains and perms.main.change_supplychain %}
             <th></th>
             {% endif %}
         </tr>
@@ -26,7 +26,7 @@
             <td>{{ chain.end_point_address }}</td>
             <td>{{ chain.contractor }}</td>
             <td>{{ chain.deadline }}</td>
-            {% if supply_chains and perms.main.change_supply_chains %}
+            {% if supply_chains and perms.main.change_supplychain %}
             <td><a href="{% url 'supply_chain' supply_id chain.id %}">подробнее</a></td>
             {% endif %}
         </tr>
@@ -34,7 +34,7 @@
         {% endif %}
     </table>
 
-    {% if perms.main.add_supply_chains %}
+    {% if perms.main.add_supplychain %}
     <a href=" {% url 'add_supply_chain' supply_id %}" class="add_new_item">Добавить этап</a>
     {% endif %}
 </div>

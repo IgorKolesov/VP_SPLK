@@ -50,7 +50,9 @@ class UserPasswordChange(PasswordChangeView):
 class AddNewCompany(CreateView):
     form_class = AddNewCompanyForm
     template_name = 'users/new_company.html'
-    title = 'Новая компания'
+    extra_context = {
+        'title': 'Новая компания'
+    }
     success_url = reverse_lazy('users:register')
 
 

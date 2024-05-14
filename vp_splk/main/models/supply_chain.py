@@ -1,6 +1,7 @@
 from django.contrib.auth import get_user_model
 from django.db import models
 from django.urls import reverse
+from django.utils import timezone
 
 from main.models.delivery_type import DeliveryType
 from main.models.status import Status
@@ -19,7 +20,7 @@ class SupplyChain(models.Model):
     end_point_address = models.CharField(max_length=250, verbose_name='Куда')
     time_create = models.DateTimeField(auto_now_add=True, verbose_name='Время создания')
     time_update = models.DateTimeField(auto_now=True, verbose_name='Время последнего изменения')
-    deadline = models.DateTimeField(verbose_name='Крайний срок')
+    deadline = models.DateTimeField(default=timezone.now, verbose_name='Крайний срок')
 
     def __str__(self):
         return self.name

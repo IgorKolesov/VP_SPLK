@@ -55,7 +55,6 @@ class ShowSupply(DataMixin, DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         comments = Comment.objects.all().filter(supply=self.kwargs.get('supply_id'), supply_chain_id=None)
-        print(comments)
         return self.get_mixin_context(context, title=context['supply'].name, file_form=UploadFileForm, supply_chain_comments=comments, comment_form=CommentForm)
 
     def get_object(self, queryset=None):
@@ -134,7 +133,6 @@ class ShowSupplyChain(DataMixin, DetailView):
 
         supply = get_object_or_404(Supply, pk=supply_id)
         supply_chain = get_object_or_404(SupplyChain, supply=supply, pk=supply_chain_id)
-        print(request.POST)
         if 'file' in request.FILES:
             form = UploadFileForm(request.POST, request.FILES)
             if form.is_valid():
@@ -159,9 +157,12 @@ class ShowSupplyChain(DataMixin, DetailView):
 
 class AddSupply(PermissionRequiredMixin, DataMixin, CreateView):
     form_class = AddNewSupply
-    template_name = 'main/forms_pages/add_supply.html'
     title = 'Новая доставка'
     permission_required = 'main.add_supply'
+    template_name = 'form_page.html'
+    extra_context = {
+        'button_title': 'Создать'
+    }
 
     def form_valid(self, form):
         s = form.save(commit=False)
@@ -171,22 +172,41 @@ class AddSupply(PermissionRequiredMixin, DataMixin, CreateView):
 
 class AddCargo(PermissionRequiredMixin, DataMixin, CreateView):
     form_class = AddNewCargo
-    template_name = 'main/forms_pages/add_cargo.html'
+    template_name = 'form_page.html'
+    extra_context = {
+        'button_title': 'Создать'
+    }
     title = 'Новый груз'
     permission_required = 'main.add_cargo'
+
+    def form_valid(self, form):
+        c = form.save(commit=False)
+        c.supply_id = self.kwargs.get('supply_id')
+        return super().form_valid(form)
 
 
 class AddSupplyChain(PermissionRequiredMixin, DataMixin, CreateView):
     form_class = AddNewSupplyChain
-    template_name = 'main/forms_pages/add_supply_chain.html'
+    template_name = 'form_page.html'
+    extra_context = {
+        'button_title': 'Создать'
+    }
     title = 'Добавить цепочку'
-    permission_required = 'main.add_supply_chain'
+    permission_required = 'main.add_supplychain'
+
+    def form_valid(self, form):
+        sc = form.save(commit=False)
+        sc.supply_id = self.kwargs.get('supply_id')
+        return super().form_valid(form)
 
 
 class UpdateSupply(PermissionRequiredMixin, DataMixin, UpdateView):
     model = Supply
     fields = '__all__'
-    template_name = 'main/forms_pages/add_supply.html'
+    template_name = 'form_page.html'
+    extra_context = {
+        'button_title': 'Сохранить'
+    }
     title = 'Редактирование доставки'
     permission_required = 'main.change_supply'
 
@@ -194,7 +214,10 @@ class UpdateSupply(PermissionRequiredMixin, DataMixin, UpdateView):
 class UpdateCargo(PermissionRequiredMixin, DataMixin, UpdateView):
     model = Cargo
     fields = '__all__'
-    template_name = 'main/forms_pages/add_cargo.html'
+    template_name = 'form_page.html'
+    extra_context = {
+        'button_title': 'Сохранить'
+    }
     title = 'Редактирование груза'
     permission_required = 'main.change_cargo'
 
@@ -202,10 +225,16 @@ class UpdateCargo(PermissionRequiredMixin, DataMixin, UpdateView):
 class UpdateSupplyChain(PermissionRequiredMixin, DataMixin, UpdateView):
     model = SupplyChain
     fields = '__all__'
-    template_name = 'main/forms_pages/add_supply_chain.html'
+    template_name = 'form_page.html'
+    extra_context = {
+        'button_title': 'Сохранить'
+    }
     title = 'Редактирование этапа доставки'
-    permission_required = 'main.change_supply_chain'
+    permission_required = 'main.change_supplychain'
 
 
 def notifications(request):
     return HttpResponse('notifications')
+
+
+

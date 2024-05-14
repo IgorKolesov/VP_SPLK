@@ -3,6 +3,4 @@ from django.shortcuts import render
 
 
 def page_not_found(request, exception):
-    return HttpResponseNotFound('<h1>404</h1>')
-
-
+    return render(request, '404.html', status=404)

@@ -1,4 +1,5 @@
 from datetime import date
+from django.utils import timezone
 
 from django.contrib.auth import get_user_model
 from django.db import models
@@ -28,7 +29,7 @@ class Supply(models.Model):
     time_create = models.DateTimeField(auto_now_add=True, verbose_name='Время создания')
     time_update = models.DateTimeField(auto_now=True, verbose_name='Время последнего изменения')
     is_active = models.BooleanField(choices=SupplyStatus.choices, default=SupplyStatus.ACTIVE, verbose_name='Статус доставки')
-    deadline = models.DateTimeField(verbose_name='Крайний срок', default=date.today(), null=False)
+    deadline = models.DateTimeField(verbose_name='Крайний срок', default=timezone.now, null=False)
 
     objects = models.Manager()
     active = ActiveSuppliesManager()
